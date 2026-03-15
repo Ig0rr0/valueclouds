@@ -2,7 +2,7 @@
 - platform: rest
   name: "ValueClouds Inverter Raw"
   resource_template: >
-    https://api.valueclouds.com/drt/api/auth/web/deviceDats?page=1&pageSize=15&devaddr=4&devcode=6422&pn=E50000220625866617&sn=DEV19CBFDDC614D25E&date={{ now().strftime('%Y-%m-%d') }}
+    https://api.valueclouds.com/drt/api/auth/web/deviceDats?page=1&pageSize=15&devaddr=4&devcode=6422&pn=PN_HERE&sn=SN_HERE&date={{ now().strftime('%Y-%m-%d') }}
   method: GET
   headers:
     Token: "{{ states('input_text.valueclouds_token') }}"
