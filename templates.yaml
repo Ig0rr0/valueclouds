@@ -1,0 +1,282 @@
+- sensor:
+
+    #ValueClouds
+    #Короткая памятка по индексам (если захотите проверить):
+    #[2] - [6]: Вольтаж батарей и панелей.
+    #[7] - [11]: Токи.
+    #[12] - [14]: Мощность заряда PV.
+    #[15]: SOC (самый важный датчик заряда).
+    #[18]: Режим работы (OffGrid/OnGrid).
+    #[33] - [35]: Температурные датчики внутри инвертора.
+    #[36] - [41] & [44]: Счетчики энергии (используйте их в панели Energy в HA).
+
+    # --- Системные данные ---
+  - name: "VC Inverter Last Update"
+    unique_id: vc_timestamp
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[1] }}"
+    icon: mdi:clock-outline
+
+  # --- Напряжение (V) ---
+  - name: "VC Battery Voltage"
+    unique_id: vc_batt_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[2] }}"
+
+  - name: "VC PV1 Voltage"
+    unique_id: vc_pv1_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[3] }}"
+
+  - name: "VC PV2 Voltage"
+    unique_id: vc_pv2_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[4] }}"
+
+  - name: "VC Inverter Voltage"
+    unique_id: vc_inv_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[5] }}"
+
+  - name: "VC BMS Battery Voltage"
+    unique_id: vc_bms_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[6] }}"
+
+  - name: "VC Grid Voltage"
+    unique_id: vc_grid_volt
+    unit_of_measurement: "V"
+    device_class: voltage
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[19] }}"
+
+  # --- Ток (A) ---
+  - name: "VC Load Current"
+    unique_id: vc_load_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[7] }}"
+
+  - name: "VC Battery Current"
+    unique_id: vc_batt_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[8] }}"
+
+  - name: "VC PV1 Charger Current"
+    unique_id: vc_pv1_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[9] }}"
+
+  - name: "VC BMS Battery Current"
+    unique_id: vc_bms_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[10] }}"
+
+  - name: "VC PV2 Charger Current"
+    unique_id: vc_pv2_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[11] }}"
+
+  - name: "VC Inverter Current"
+    unique_id: vc_inv_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[22] }}"
+
+  - name: "VC Grid Current"
+    unique_id: vc_grid_curr
+    unit_of_measurement: "A"
+    device_class: current
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[23] }}"
+
+  # --- Мощность (W / VA / var) ---
+  - name: "VC PV1 Charger Power"
+    unique_id: vc_pv1_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[12] }}"
+
+  - name: "VC PV2 Charger Power"
+    unique_id: vc_pv2_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[13] }}"
+
+  - name: "VC PV Total Power"
+    unique_id: vc_pv_total_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[14] }}"
+
+  - name: "VC Load Power (PLoad)"
+    unique_id: vc_pload_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[16] }}"
+
+  - name: "VC Grid Power (PGrid)"
+    unique_id: vc_pgrid_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[17] }}"
+
+  - name: "VC Inverter Active Power"
+    unique_id: vc_pinv_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[24] }}"
+
+  - name: "VC Battery Power"
+    unique_id: vc_batt_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[42] }}"
+
+  - name: "VC Inverter Apparent Power"
+    unique_id: vc_sinv_va
+    unit_of_measurement: "VA"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[25] }}"
+
+  - name: "VC Grid Apparent Power"
+    unique_id: vc_sgrid_va
+    unit_of_measurement: "VA"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[26] }}"
+
+  - name: "VC Load Apparent Power"
+    unique_id: vc_sload_va
+    unit_of_measurement: "VA"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[27] }}"
+
+  - name: "VC Inverter Reactive Power"
+    unique_id: vc_qinv_var
+    unit_of_measurement: "var"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[28] }}"
+
+  - name: "VC Grid Reactive Power"
+    unique_id: vc_qgrid_var
+    unit_of_measurement: "var"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[29] }}"
+
+  - name: "VC Load Reactive Power"
+    unique_id: vc_qload_var
+    unit_of_measurement: "var"
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[30] }}"
+
+  # --- Энергия (kWh) ---
+  - name: "VC Accumulated Charger Power"
+    unique_id: vc_acc_charger
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[36] }}"
+
+  - name: "VC Accumulated Discharger Power"
+    unique_id: vc_acc_discharger
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[37] }}"
+
+  - name: "VC Accumulated Buy Power"
+    unique_id: vc_acc_buy
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[38] }}"
+
+  - name: "VC Accumulated Sell Power"
+    unique_id: vc_acc_sell
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[39] }}"
+
+  - name: "VC Accumulated Load Power"
+    unique_id: vc_acc_load
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[40] }}"
+
+  - name: "VC Accumulated Self-Use Power"
+    unique_id: vc_acc_selfuse
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[41] }}"
+
+  - name: "VC PV Cumulative Generation"
+    unique_id: vc_pv_cum_gen
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[44] }}"
+
+  # --- Статус и Температура ---
+  - name: "VC Battery SOC"
+    unique_id: vc_soc
+    unit_of_measurement: "%"
+    device_class: battery
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[15] }}"
+
+  - name: "VC Work State"
+    unique_id: vc_work_state
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[18] }}"
+    icon: mdi:state-machine
+
+  - name: "VC Inverter Frequency"
+    unique_id: vc_inv_freq
+    unit_of_measurement: "Hz"
+    device_class: frequency
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[31] }}"
+
+  - name: "VC Grid Frequency"
+    unique_id: vc_grid_freq
+    unit_of_measurement: "Hz"
+    device_class: frequency
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[32] }}"
+
+  - name: "VC AC Radiator Temperature"
+    unique_id: vc_ac_temp
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[33] }}"
+
+  - name: "VC Transformer Temperature"
+    unique_id: vc_trans_temp
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[34] }}"
+
+  - name: "VC DC Radiator Temperature"
+    unique_id: vc_dc_temp
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[35] }}"
+
+  - name: "VC BMS Battery Temperature"
+    unique_id: vc_bms_temp
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[45] }}"
+
+  - name: "VC Charger Work Enable"
+    unique_id: vc_charger_enable
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[43] }}"
+
+  - name: "VC Software Version"
+    unique_id: vc_sw_version
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[20] }}"
+
+  - name: "VC Rated Power"
+    unique_id: vc_rated_pwr
+    unit_of_measurement: "W"
+    device_class: power
+    state: "{{ state_attr('sensor.valueclouds_inverter_raw', 'field')[21] }}"

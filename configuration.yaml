@@ -1,0 +1,17 @@
+automation: !include automations.yaml
+template: !include templates.yaml
+sensor: !include sensors.yaml
+
+#ValueClouds
+input_text:
+  valueclouds_token:
+    name: "ValueClouds Token"
+    initial: ""
+
+rest_command:
+  valueclouds_login:
+    url: "https://api.valueclouds.com/ppr/web/login/login"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: !secret valueclouds

@@ -1,0 +1,17 @@
+- alias: "ValueClouds - Refresh Token"
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sensor.valueclouds_inverter_raw
+    to: "unavailable" # Если API вернуло ошибку, статус станет таким
+  action:
+  - service: rest_command.valueclouds_login
+    response_variable: login_response
+  - condition: template
+    value_template: "{{ login_response['return_value']['status'] == 200 }}"
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.valueclouds_token
+    data:
+      value: "{{ (login_response['return_value']['body'] | from_json).data.token }}"

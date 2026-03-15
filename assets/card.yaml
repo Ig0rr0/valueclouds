@@ -1,0 +1,109 @@
+views:
+- type: sections
+  sections:
+  - type: grid
+    cards:
+    - cardstyle: full
+      wide: false
+      large_font: false
+      show_solar: true
+      show_battery: true
+      show_grid: true
+      center_no_grid: false
+      card_height: 100%
+      card_width: 100%
+      decimal_places: 2
+      decimal_places_energy: 1
+      dynamic_line_width: true
+      max_line_width: 4
+      min_line_width: 1
+      inverter:
+        modern: true
+        colour: '#9e9e9e'
+        autarky: 'no'
+        model: sunsynk
+        auto_scale: true
+        three_phase: false
+        navigate: ''
+        label_autarky: ''
+        label_ratio: ''
+      battery:
+        energy: 0
+        shutdown_soc: 20
+        show_daily: false
+      battery2:
+        energy: 0
+        shutdown_soc: 20
+        soc_end_of_charge: 100
+        invert_power: false
+        hide_soc: false
+        colour: '#ffc0cb'
+        show_remaining_energy: true
+        remaining_energy_to_shutdown: false
+        show_absolute: false
+        auto_scale: true
+        dynamic_colour: true
+        linear_gradient: true
+        animate: true
+        path_threshold: 100
+        navigate: ''
+        invert_flow: false
+      solar:
+        show_daily: true
+        mppts: 1
+      load:
+        show_daily: true
+      grid:
+        show_daily_buy: true
+        show_daily_sell: false
+        show_nonessential: true
+      type: custom:sunsynk-power-flow-card
+      entities:
+        use_timer_248: switch.sunsynk_toggle_system_timer
+        priority_load_243: switch.sunsynk_toggle_priority_load
+        inverter_voltage_154: sensor.vc_inverter_voltage
+        load_frequency_192: sensor.vc_inverter_frequency
+        inverter_current_164: sensor.vc_inverter_current
+        inverter_power_175: sensor.vc_inverter_active_power
+        grid_connected_status_194: sensor.vc_work_state
+        inverter_status_59: sensor.vc_charger_work_enable
+        battery_voltage_183: sensor.vc_battery_voltage
+        battery_power_190: sensor.vc_battery_power
+        battery_current_191: sensor.vc_battery_current
+        grid_power_169: sensor.vc_grid_power_pgrid
+        day_grid_import_76: sensor.sunsynk_day_grid_import
+        day_grid_export_77: sensor.sunsynk_day_grid_export
+        grid_ct_power_172: sensor.vc_grid_power_pgrid
+        day_load_energy_84: sensor.sunsynk_day_load_energy
+        essential_power: sensor.vc_inverter_active_power
+        nonessential_power: sensor.vc_grid_power_pgrid
+        aux_power_166: sensor.sunsynk_aux_power
+        pv1_power_186: sensor.vc_pv1_charger_power
+        pv1_voltage_109: sensor.vc_pv1_voltage
+        pv1_current_110: sensor.vc_pv1_charger_current
+        day_battery_charge_70: sensor.vc_accumulated_charger_power
+        day_battery_discharge_71: sensor.vc_accumulated_discharger_power
+        total_pv_generation: sensor.vc_pv_cumulative_generation
+        day_pv_energy_108: sensor.vc_pv_cumulative_generation
+        grid_voltage: sensor.vc_grid_voltage
+  - cards:
+    - type: history-graph
+      entities:
+      - entity: sensor.vc_pv1_voltage
+    - type: history-graph
+      entities:
+      - entity: sensor.vc_pv_total_power
+    - type: history-graph
+      hours_to_show: 12
+      entities:
+      - entity: sensor.vc_battery_voltage
+    - type: history-graph
+      entities:
+      - entity: sensor.vc_pv_cumulative_generation
+    - type: history-graph
+      entities:
+      - entity: sensor.vc_dc_radiator_temperature
+    - type: history-graph
+      entities:
+      - entity: sensor.vc_work_state
+    column_span: 2
